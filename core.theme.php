@@ -316,12 +316,10 @@ function theme_date_format($string, $format = null, $default_date = '') {
 	$timestamp = 0;
 
 	if ($string) {
-		// Check whether the $string is really a date/timestamp
-		if (is_numeric($string) || strtotime($string) !== false) {
-			$timestamp = $string; // smarty_make_timestamp($string);
-		}
+		// Conversion to timestamp, if string
+		$timestamp = is_numeric($string) ? $string : strtotime($string);
 	} elseif ($default_date != '') {
-		$timestamp = $default_date; // smarty_make_timestamp($default_date);
+		$timestamp = is_numeric($default_date) ? $default_date : strtotime($default_date);
 	} else {
 		return;
 	}
